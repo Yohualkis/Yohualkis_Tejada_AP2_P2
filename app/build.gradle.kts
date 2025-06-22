@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -40,6 +43,41 @@ android {
 }
 
 dependencies {
+
+    // Iconos
+    implementation(libs.androidx.material.icons.extended)
+
+    //navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    //room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.activity.ktx)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.room.compiler)
+
+    implementation(libs.androidx.foundation)
+
+    //optional
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.material3)
+    implementation (libs.androidx.material)
+    implementation(libs.androidx.material.v131) // Usa la última versión
+
+
+
+    //Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
+    implementation(libs.logging.interceptor)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
