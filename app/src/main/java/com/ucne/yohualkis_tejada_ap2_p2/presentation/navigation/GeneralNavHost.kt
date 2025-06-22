@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.ucne.yohualkis_tejada_ap2_p2.presentation.repositorio.ClientesListScreen
+import com.ucne.yohualkis_tejada_ap2_p2.presentation.repositorio.RepositorioListScreen
 
 @Composable
 fun GeneralNavHost(
@@ -18,8 +18,8 @@ fun GeneralNavHost(
         modifier = modifier
     ) {
         composable<Screen.ListaEntidades>{
-            ClientesListScreen(
-                nuevoCliente = {},
+            RepositorioListScreen(
+                nuevoRepo = {},
                 goBack = { navHostController.navigateUp() }
             )
         }
