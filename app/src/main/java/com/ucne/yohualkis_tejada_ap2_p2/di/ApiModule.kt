@@ -2,6 +2,7 @@ package com.ucne.yohualkis_tejada_ap2_p2.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.ucne.yohualkis_tejada_ap2_p2.data.remote.ContributorApi
 import com.ucne.yohualkis_tejada_ap2_p2.data.remote.GitHubApi
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,15 @@ object ApiModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(GitHubApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesContributorApi(moshi: Moshi): ContributorApi {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create(ContributorApi::class.java)
     }
 }
