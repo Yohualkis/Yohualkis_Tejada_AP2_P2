@@ -33,13 +33,13 @@ class RepositoriosViewModel @Inject constructor(
     fun onEvent(event: RepositorioEvent) {
         when (event) {
             is RepositorioEvent.GetRepositorios -> getRepositorios(event.username)
-            RepositorioEvent.Delete -> TODO()
+            RepositorioEvent.Delete -> {}
             is RepositorioEvent.DescriptionChange -> descriptionChange(event.description)
             is RepositorioEvent.HtmlUrlChange -> htmlUrlChange(event.htmlUrl)
             RepositorioEvent.Limpiar -> limpiar()
             RepositorioEvent.LimpiarErrores -> limpiarErrores()
             is RepositorioEvent.NameChange -> nameChange(event.name)
-            RepositorioEvent.Save -> TODO()
+            RepositorioEvent.Save -> {}
         }
     }
 
