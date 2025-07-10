@@ -27,7 +27,7 @@ class RepositoriosViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
-        getRepositorios("Yohualkis")
+        getRepositorios("enelramon")
     }
 
     fun onEvent(event: RepositorioEvent) {

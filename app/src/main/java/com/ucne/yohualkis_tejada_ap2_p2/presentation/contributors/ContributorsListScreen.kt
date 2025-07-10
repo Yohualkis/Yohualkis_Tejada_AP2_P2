@@ -64,7 +64,7 @@ fun ContributorsList(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    onEvent(ContributorsEvent.GetContributors("Yohualkis", nombreRepo))
+                    onEvent(ContributorsEvent.GetContributors("enelramon", nombreRepo))
                 }
             ) {
                 Icon(Icons.Filled.Refresh, "")

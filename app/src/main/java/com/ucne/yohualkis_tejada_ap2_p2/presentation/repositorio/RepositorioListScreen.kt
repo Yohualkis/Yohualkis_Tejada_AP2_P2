@@ -85,7 +85,7 @@ fun RepositorioListBody(
         val refreshing = uiState.isLoading
         val pullRefreshState = rememberPullRefreshState(
             refreshing = refreshing,
-            onRefresh = { onEventRepository(RepositorioEvent.GetRepositorios("Yohualkis")) }
+            onRefresh = { onEventRepository(RepositorioEvent.GetRepositorios("enelramon")) }
         )
 
         Box(
@@ -142,7 +142,7 @@ fun RepositorioCard(
             .fillMaxWidth()
             .padding(vertical = 6.dp)
             .clickable {
-                goToContributors("Yohualkis", repositorio.name)
+                goToContributors("enelramon", repositorio.name)
             },
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
