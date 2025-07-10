@@ -42,14 +42,16 @@ import com.ucne.yohualkis_tejada_ap2_p2.presentation.composables.TopBarGenerica
 fun RepositorioListScreen(
     viewModel: RepositoriosViewModel = hiltViewModel(),
     nuevoRepo: () -> Unit,
-    goBack: () -> Unit
+    goBack: () -> Unit,
+    goToContributor: (username: String, nombreRepo: String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     RepositorioListBody(
         uiState = uiState,
-        onEvent = viewModel::onEvent,
+        onEventRepository = viewModel::onEvent,
         nuevoRepo = nuevoRepo,
-        goBack = goBack
+        goBack = goBack,
+        goToContributors = goToContributor,
     )
 }
 
@@ -57,9 +59,10 @@ fun RepositorioListScreen(
 @Composable
 fun RepositorioListBody(
     uiState: RepositoriosUiState,
-    onEvent: (RepositorioEvent) -> Unit,
+    onEventRepository: (RepositorioEvent) -> Unit,
     nuevoRepo: () -> Unit,
-    goBack: () -> Unit
+    goBack: () -> Unit,
+    goToContributors: (username: String, nombreRepo: String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -82,7 +85,7 @@ fun RepositorioListBody(
         val refreshing = uiState.isLoading
         val pullRefreshState = rememberPullRefreshState(
             refreshing = refreshing,
-            onRefresh = { onEvent(RepositorioEvent.GetRepositorios("Yohualkis")) }
+            onRefresh = { onEventRepository(RepositorioEvent.GetRepositorios("Yohualkis")) }
         )
 
         Box(
@@ -97,7 +100,10 @@ fun RepositorioListBody(
                     .padding(horizontal = 12.dp, vertical = 8.dp)
             ) {
                 items(uiState.listaRepositorios) { repositorio ->
-                    RepositorioCard(repositorio)
+                    RepositorioCard(
+                        repositorio = repositorio,
+                        goToContributors = goToContributors
+                    )
                 }
 
                 item {
@@ -117,7 +123,10 @@ fun RepositorioListBody(
 }
 
 @Composable
-fun RepositorioCard(repositorio: RepositorioDto) {
+fun RepositorioCard(
+    repositorio: RepositorioDto,
+    goToContributors: (username: String, nombreRepo: String) -> Unit
+) {
     var isExpanded by remember { mutableStateOf(false) }
 
     val descripcion = repositorio.description ?: "Sin descripción"
@@ -132,7 +141,9 @@ fun RepositorioCard(repositorio: RepositorioDto) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp)
-            .clickable { },
+            .clickable {
+                goToContributors("Yohualkis", repositorio.name)
+            },
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
@@ -193,8 +204,9 @@ fun RepositorioListPreview() {
 
     RepositorioListBody(
         uiState = RepositoriosUiState(listaRepositorios = list),
-        onEvent = {},
+        onEventRepository = {},
         nuevoRepo = {},
-        goBack = {}
+        goBack = {},
+        goToContributors = {a,b ->}
     )
 }
